@@ -22,8 +22,8 @@ app = Flask(__name__)
 def cut():
     if request.method == 'POST':
         sentence = request.form.get('sentence', default='')
-        cut_all = request.form.get('cut_all', default=False)
-        HMM = request.form.get('HMM', default=False)
+        cut_all = request.form.get('cut_all', type=bool, default=False)
+        HMM = request.form.get('HMM', type=bool, default=False)
     else:
         sentence = request.args.get('sentence','')
         cut_all = True if request.args.get('cut_all', False) else False
@@ -43,7 +43,7 @@ def cut():
 def cut_for_search():
     if request.method == 'POST':
         sentence = request.form.get('sentence', default='')
-        HMM = request.form.get('HMM', default=False)
+        HMM = request.form.get('HMM', type=bool, default=False)
     else:
         sentence = request.args.get('sentence','')
         HMM = True if request.args.get('HMM', False) else False
@@ -62,7 +62,7 @@ def cut_for_search():
 def posseg_cut():
     if request.method == 'POST':
         sentence = request.form.get('sentence', default='')
-        HMM = request.form.get('HMM', default=False)
+        HMM = request.form.get('HMM', type=bool, default=False)
     else:
         sentence = request.args.get('sentence','')
         HMM = True if request.args.get('HMM', False) else False
@@ -85,7 +85,7 @@ def tokenize():
     if request.method == 'POST':
         sentence = request.form.get('sentence', default='')
         mode = request.form.get('mode',default='default')
-        HMM = request.form.get('HMM', default=False)
+        HMM = request.form.get('HMM', type=bool, default=False)
     else:
         sentence = request.args.get('sentence','')
         mode = request.args.get('mode','default')
