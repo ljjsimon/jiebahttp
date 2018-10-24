@@ -1,5 +1,6 @@
 #coding=utf8
 
+import os
 from flask import Flask
 from flask import request
 import json
@@ -12,9 +13,8 @@ fh.close
 
 config = json.loads(config)
 port = config['port']
-if (config['dict_file'] != 'default'):
+if (os.path.exists(config['dict_file'])):
     jieba.load_userdict(config['dict_file'])
-
 
 app = Flask(__name__)
 
