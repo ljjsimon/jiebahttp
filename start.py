@@ -6,6 +6,7 @@ from flask import request
 import json
 import jieba
 import jieba.posseg as pseg
+import jieba.analyse
 
 fh = open('config.json', 'r')
 config = fh.read()
@@ -104,6 +105,50 @@ def tokenize():
         })
 
     return json.dumps(word)
+
+'''
+allowPOS = 'ns,n,x' 用,分隔
+'''
+@app.route('/extract_tags',methods=['POST','GET'])
+def extract_tags():
+    if request.method == 'POST':
+        sentence = request.form.get('sentence', default='')
+        topK = request.form.get('topK',default=20)
+        withWeight = request.form.get('withWeight', type=bool, default=False)
+        allowPOS = request.form.get('allowPOS', default= False)
+    else:
+        sentence = request.args.get('sentence','')
+        topK = request.args.get('topK',20)
+        withWeight = request.args.get('withWeight', False)
+        allowPOS = request.args.get('allowPOS', False)
+
+    allowPOS = () if allowPOS === False else (allowPOS.split(','))
+    
+    result = jieba.analyse.extract_tags(sentence, topK, withWeight, allowPOS)
+    
+    return json.dumps(result)
+
+'''
+allowPOS = 'ns,n,x' 用,分隔
+'''
+@app.route('/textrank', methods=['POST','GET'])
+def textrank():
+    if request.method == 'POST':
+        sentence = request.form.get('sentence', default='')
+        topK = request.form.get('topK',default=20)
+        withWeight = request.form.get('withWeight', type=bool, default=False)
+        allowPOS = request.form.get('allowPOS', default= False)
+    else:
+        sentence = request.args.get('sentence','')
+        topK = request.args.get('topK',20)
+        withWeight = True if request.args.get('withWeight', False) else False
+        allowPOS = request.args.get('allowPOS', False)
+        
+    allowPOS = () if allowPOS === False else (allowPOS.split(','))
+    
+    result = jieba.analyse.textrank(sentence, topK, withWeight, allowPOS)
+
+    return json.dumps(result)
 
 if __name__ == '__main__':
     app.run(port=port)
