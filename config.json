@@ -1,4 +1,4 @@
 {
   "port": "8080",
-  "dict_file": "default"
+  "dict_file": "path_to_dict_file"
 }

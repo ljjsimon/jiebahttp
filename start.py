@@ -122,7 +122,7 @@ def extract_tags():
         withWeight = request.args.get('withWeight', False)
         allowPOS = request.args.get('allowPOS', False)
 
-    allowPOS = () if allowPOS === False else (allowPOS.split(','))
+    allowPOS = () if allowPOS == False else (allowPOS.split(','))
     
     result = jieba.analyse.extract_tags(sentence, topK, withWeight, allowPOS)
     
@@ -144,7 +144,7 @@ def textrank():
         withWeight = True if request.args.get('withWeight', False) else False
         allowPOS = request.args.get('allowPOS', False)
         
-    allowPOS = () if allowPOS === False else (allowPOS.split(','))
+    allowPOS = () if allowPOS == False else (allowPOS.split(','))
     
     result = jieba.analyse.textrank(sentence, topK, withWeight, allowPOS)
 
