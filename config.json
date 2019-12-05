@@ -1,4 +1,4 @@
 {
-  "port": "8080",
+  "port": "8081",
   "dict_file": "path_to_dict_file"
 }

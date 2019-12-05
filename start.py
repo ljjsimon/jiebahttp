@@ -33,12 +33,9 @@ def cut():
     if (sentence == ''):
         return ''
 
-    seg_list = jieba.cut(sentence,cut_all,HMM)
-    word = []
-    for w in seg_list:
-        word.append(w)
+    seg_list = jieba.lcut(sentence,cut_all,HMM)
 
-    return json.dumps(word)
+    return json.dumps(seg_list)
 
 @app.route('/cut_for_search', methods=['POST','GET'])
 def cut_for_search():
@@ -52,12 +49,9 @@ def cut_for_search():
     if (sentence == ''):
         return ''
 
-    seg_list = jieba.cut_for_search(sentence,HMM)
-    word = []
-    for w in seg_list:
-        word.append(w)
+    seg_list = jieba.lcut_for_search(sentence,HMM)
 
-    return json.dumps(word)
+    return json.dumps(seg_list)
 
 @app.route('/posseg_cut', methods=['POST', 'GET'])
 def posseg_cut():
