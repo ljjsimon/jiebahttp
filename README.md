@@ -12,3 +12,6 @@ python start.py
 /posseg_cut?sentence=&HMM=
 /tokenize?sentence=&mode=&HMM
 ```
+
+userdict 下面是我总结的词典
+brand.txt 品牌名
