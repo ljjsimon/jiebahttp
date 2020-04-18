@@ -14,8 +14,9 @@ fh.close
 
 config = json.loads(config)
 port = config['port']
-if (os.path.exists(config['dict_file'])):
-    jieba.load_userdict(config['dict_file'])
+for filename in config['dict_file']:
+    if (os.path.exists(filename)):
+        jieba.load_userdict(filename)
 
 app = Flask(__name__)
 
