@@ -18,6 +18,9 @@ for filename in config['dict_file']:
     if (os.path.exists(filename)):
         jieba.load_userdict(filename)
 
+# comment this，it's special for me
+jieba.suggest_freq(('男','女'), True)
+
 app = Flask(__name__)
 
 @app.route('/cut', methods=['POST','GET'])
